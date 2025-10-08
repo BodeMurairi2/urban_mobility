@@ -1,0 +1,12 @@
+pandas
+fastapi
+requests
+httpie
+simpledbf
+uvicorn
+sqlalchemy
+psycopg2-binary
+tables
+fastparquet
+pyarrow
+
