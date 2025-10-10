@@ -44,5 +44,4 @@ htmlcov/
 *.out
 *.pid
 *.seed
-*.ipynb
 *.class

@@ -2,6 +2,7 @@
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from web.router import router as api_router
 
 app = FastAPI()
 
@@ -17,23 +18,20 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app = FastAPI(
+    title="NYC Taxi Trip Analysis",
+    description="Dashboard API for NYC Yellow Taxi Dataset",
+    version="1.0.0",
+)
+
+app.include_router(api_router, prefix="/api")
 
 @app.get("/")
-async def home():
-    return {
-        "message": "Welcome to NYC Analyzis",
-        "status": "Success"
-    }
-
-@app.get("/dashboard")
-async def dashboard():
-    return {
-        "message": "This is our dashboard",
-        "success": True
-    }
+async def root():
+    return {"message": "NYC Taxi API is running!"}
 
 if __name__ == "__main__":
     uvicorn.run(
-        "app:app",
+        "web.app:app",
         port=8000
     )
