@@ -1,17 +1,21 @@
 #!/usr/bin/env python3
+import os
 from pathlib import Path
 import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import pyarrow.parquet as pq
 
-DB_PATH = Path("/home/bode-murairi/Documents/programming/urban_mobility/api/data/databases/create/instance/trips.db")
+# Setup database
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, "../../database/instance/trips.db")
 engine = create_engine(f"sqlite:///{DB_PATH}")
 Session = sessionmaker(bind=engine)
 
 # Open Parquet file with pyarrow
-file_path = "/home/bode-murairi/Documents/programming/urban_mobility/api/services/extract/data_file/"
-parquet_file = pq.ParquetFile(f"{file_path}/yellow_tripdata.parquet")
+PARQUET_FILE = os.path.join(BASE_DIR, "../data_file/yellow_tripdata.parquet")
+
+parquet_file = pq.ParquetFile(PARQUET_FILE)
 
 # Standardized column names
 columns = [
@@ -36,9 +40,7 @@ with engine.begin() as conn:
         # Convert to DataFrame
         df_chunk = pd.DataFrame(rg.to_pandas())
 
-        # -----------------------------
         # Remove duplicates and NaNs
-        # -----------------------------
         df_chunk = df_chunk.drop_duplicates(ignore_index=True)
         df_chunk = df_chunk.dropna()
 
@@ -54,3 +56,4 @@ with engine.begin() as conn:
             method=None
         )
         print(f"Inserted batch {i+1}")
+print("Trip data saved successfully")

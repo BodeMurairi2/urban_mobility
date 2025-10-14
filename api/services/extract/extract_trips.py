@@ -39,7 +39,7 @@ def get_most_visited_places_bypopulation():
 def new_datatime_clean():
     """ trip duration studies"""
     data = pd.read_parquet(DATA_PATH)
-    clean_data = data.dropna()
+    clean_data = data.dropna().copy()
     clean_data["trip_duration"] = clean_data["tpep_dropoff_datetime"] - clean_data["tpep_pickup_datetime"]
     return clean_data
 
@@ -61,6 +61,16 @@ def average_trip_distance():
     """"find average trip distance"""
     clean_data = new_datatime_clean()
     return clean_data["trip_distance"].mean()
+
+def average_total_price():
+    """find average total trip price and total passanger count"""
+    clean_data = new_datatime_clean()
+    positive_price = clean_data[clean_data["total_amount"] > 0]
+    return (clean_data["total_amount"].mean(),
+            clean_data["total_amount"].max(),
+            positive_price["total_amount"].min(),
+            clean_data["passenger_count"].sum()
+            )
 
 def vendor_dominate_region():
     """Most dominate region by vendor ID"""

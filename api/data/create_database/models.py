@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey
+from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import relationship
-from base import Base
+#from base import Base
+
+Base = declarative_base()
 
 class PaymentTypes(Base):
     __tablename__ = "payment_types"

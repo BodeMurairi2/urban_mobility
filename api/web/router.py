@@ -6,7 +6,7 @@ from services.transform.get_trips import (
     longest_trip,
     shortest_trip,
     average_trip_summary,
-    vendor_dominant_region,
+    vendor_dominant_region
 )
 
 router = APIRouter()

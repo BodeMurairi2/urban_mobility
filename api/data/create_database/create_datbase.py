@@ -6,7 +6,7 @@ from base import Base
 import models
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_PATH = os.path.join(BASE_DIR, "instance", "trips.db")
+DB_PATH = os.path.join(BASE_DIR, "../../database/instance", "trips.db")
 os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
 
 DATABASE_URL = f"sqlite:///{DB_PATH}"

@@ -1,32 +1,26 @@
 #!/usr/bin/env python3
 """This script saves Taxi Zone Locations to the database"""
-from pathlib import Path
-import pandas as pd
 import os
+import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
-from models import TaxiZones
-from base import Base  # in case relationships need it
+from data.create_database.models import TaxiZones
+from data.create_database.base import Base
 
-# -----------------------------
 # Setup database
-# -----------------------------
-DB_PATH = Path("/home/bode-murairi/Documents/programming/urban_mobility/api/data/databases/create/instance/trips.db")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, "../../database/instance/trips.db")
 engine = create_engine(f"sqlite:///{DB_PATH}")
 Session = sessionmaker(bind=engine)
 
 # Load CSV file (dynamic path)
-DEFAULT_CSV_PATH = Path("/home/bode-murairi/Documents/programming/urban_mobility/api/services/extract/data_file/taxi_zone_lookup.csv")
-CSV_PATH = Path(os.getenv("TAXI_CSV_PATH", str(DEFAULT_CSV_PATH)))
+CSV_PATH = os.path.join(BASE_DIR, "../data_file/taxi_zone_lookup.csv")
 
-print(f"Using CSV path: {CSV_PATH}")
-
-if not CSV_PATH.exists():
+if not CSV_PATH:
     raise FileNotFoundError(f"DATA file not found: {CSV_PATH}")
 
 data = pd.read_csv(CSV_PATH)
-print("Columns found:", data.columns.to_list())
 
 # Save function
 def save_to_database(csv_file: pd.DataFrame):

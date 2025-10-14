@@ -10,3 +10,4 @@ tables
 fastparquet
 pyarrow
 sklearn
+uvicorn
