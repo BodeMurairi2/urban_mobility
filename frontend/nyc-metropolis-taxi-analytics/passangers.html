@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insights - NYC Taxi Passengers Visualization</title>
+  <link rel="stylesheet" href="data.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <a href="/" class="home-link">
+        <img src="../images/projext_logo101_cstmzd.png" alt="NYC Taxi Analytics Logo" class="logo-img" />
+      </a>
+    </div>
+    <nav>
+      <a href="index9.html">Home</a>
+      <a href="#">Browse</a>
+      <a href="insights.html">Insights</a>
+      <a href="data.html">Data</a>
+    </nav>
+      <i class="fas fa-search"></i>
+      <i class="fas fa-cog"></i>
+      <i class="fas fa-bars"></i>
+    </nav>
+  </header>
+
+<section class="info-section light">
+  <h1>Passengers Dashboard</h1>
+  <p>Here you can see the total number of passengers per NYC taxi dropoff zone, grouped by borough. The stacked bar chart shows the contribution of each zone to the borough’s total passengers.</p>
+</section>
+
+<section class="info-section dark">
+  <h2>Most Passengers by Dropoff Zone (Stacked by Borough)</h2>
+  <canvas id="passengersChart"></canvas>
+</section>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-logo">
+      <img src="../images/projext_logo101_cstmzd.png" alt="NYC Taxi Analytics Logo" class="footer-logo-img" />
+      <p>NYC Taxi Analytics — Empowering smarter urban mobility decisions.</p>
+    </div>
+    <div class="footer-links">
+      <h3>Explore</h3>
+      <a href="index_II.html">Home</a>
+      <a href="#">Browse</a>
+      <a href="insights.html">Insights</a>
+      <a href="data.html">Data</a>
+    </div>
+    <div class="footer-socials">
+      <h3>Follow Us</h3>
+      <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+      <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+      <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+    </div>
+  </div>
+  <p class="footer-bottom">© 2025 NYC Metropolis Taxi Analytics | Inspired by WRI.org</p>
+</footer>
+
+<button id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const API_BASE = "http://127.0.0.1:8000/api";
+
+  async function renderPassengersChart() {
+    try {
+      const response = await fetch(`${API_BASE}/visit/most_passengers`);
+      const data = await response.json();
+      console.log("Fetched passengers data:", data);
+
+      // Group data by DOLocationName (borough)
+      const boroughs = [...new Set(data.map(d => d.DOLocationName))];
+      const zones = data.map(d => d.Zone);
+
+      // Assign a unique color per borough
+      const colors = {};
+      const colorPalette = [
+        "rgba(54, 162, 235, 0.7)",
+        "rgba(255, 99, 132, 0.7)",
+        "rgba(255, 206, 86, 0.7)",
+        "rgba(75, 192, 192, 0.7)",
+        "rgba(153, 102, 255, 0.7)"
+      ];
+      boroughs.forEach((b, i) => colors[b] = colorPalette[i % colorPalette.length]);
+
+      // Prepare datasets
+      const datasets = boroughs.map(borough => {
+        return {
+          label: borough,
+          data: data.map(d => d.DOLocationName === borough ? d.PassangerCount : 0),
+          backgroundColor: colors[borough]
+        };
+      });
+
+      const ctx = document.getElementById("passengersChart").getContext("2d");
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: zones,
+          datasets: datasets
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: "top" },
+            title: { display: true, text: "NYC Taxi Passengers by Dropoff Zone (Stacked by Borough)" }
+          },
+          scales: {
+            x: { stacked: true },
+            y: { stacked: true, beginAtZero: true }
+          }
+        }
+      });
+
+    } catch (error) {
+      console.error("Error rendering passengers chart:", error);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", renderPassengersChart);
+</script>
+
+</body>
+</html>

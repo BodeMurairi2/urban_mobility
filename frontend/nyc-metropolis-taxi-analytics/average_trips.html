@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NYC Taxi Trip Statistics</title>
+  <link rel="stylesheet" href="data.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* Container for all stat cards */
+    #averageStatsSection {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    #averageStatsSection h1 {
+      margin-bottom: 1rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+      justify-items: center;
+    }
+
+    .stat-card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+      width: 100%;
+      max-width: 250px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    }
+
+    .stat-card i {
+      font-size: 2rem;
+      color: #007777;
+      margin-bottom: 10px;
+    }
+
+    .stat-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .stat-value {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #004b4b;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <a href="/" class="home-link">
+      <img src="../images/projext_logo101_cstmzd.png" alt="NYC Taxi Analytics Logo" class="logo-img" />
+    </a>
+  </div>
+  <nav>
+    <a href="index9.html">Home</a>
+    <a href="#">Browse</a>
+    <a href="insights.html">Insights</a>
+    <a href="data.html">Data</a>
+  </nav>
+</header>
+
+<section class="info-section light" id="averageStatsSection">
+  <h1>NYC Taxi Trip Statistics</h1>
+  
+  <div class="stats-grid" id="statsGrid">
+    <!-- Stat cards will be injected here -->
+  </div>
+</section>
+
+<script>
+  const API_BASE = "http://127.0.0.1:8000/api";
+
+  const statDefinitions = [
+    { key: 'average_trip_distance', title: 'Average Trip Distance', icon: 'fa-road' },
+    { key: 'highest_ticket_price', title: 'Highest Ticket Price', icon: 'fa-money-bill-wave' },
+    { key: 'smallest_ticket_price', title: 'Smallest Ticket Price', icon: 'fa-coins' },
+    { key: 'average_total_price', title: 'Average Total Price', icon: 'fa-dollar-sign' },
+    { key: 'total_number_passanger', title: 'Total Number of Passengers', icon: 'fa-users' }
+  ];
+
+  async function renderAverageStats() {
+    try {
+      const response = await fetch(`${API_BASE}/trips/average`);
+      const stats = await response.json();
+
+      const grid = document.getElementById('statsGrid');
+      grid.innerHTML = '';
+
+      statDefinitions.forEach(def => {
+        const card = document.createElement('div');
+        card.className = 'stat-card';
+        card.innerHTML = `
+          <i class="fas ${def.icon}"></i>
+          <div class="stat-title">${def.title}</div>
+          <div class="stat-value">${stats[def.key]}</div>
+        `;
+        grid.appendChild(card);
+      });
+
+    } catch (error) {
+      console.error('Error fetching average stats:', error);
+      const grid = document.getElementById('statsGrid');
+      grid.innerHTML = `<p style="color:red;">Failed to load stats.</p>`;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', renderAverageStats);
+</script>
+
+</body>
+</html>
