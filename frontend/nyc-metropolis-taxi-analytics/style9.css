@@ -30,21 +30,31 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 0.7rem 2rem;
   z-index: 100;
 }
 
-header a {
+.logo-img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+header nav a {
   color: #fff;
   text-decoration: none;
-  margin: 0 10px;
   font-weight: 500;
 }
 
-header img {
-  width: 120px;
-  height: auto;
-  object-fit: contain;
+header nav i {
+  color: #fff;
+  cursor: pointer;
 }
 
 /* ===== HERO SECTION ===== */
@@ -75,13 +85,42 @@ header img {
 
 .hero button {
   background: #ffc107;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-/* ===== IMPROVED CONTENT SECTIONS ===== */
+/* "Head to Insights" Button */
+.insight-btn {
+  background: linear-gradient(135deg, #00bfa5, #00796b);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 28px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.insight-btn a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.insight-btn:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #009688, #00695c);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.insight-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ===== CONTENT SECTIONS ===== */
 .content-section {
   display: flex;
   align-items: center;
@@ -109,7 +148,7 @@ header img {
   object-fit: cover;
   border-radius: 14px;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
-  order: 2; /* always right side */
+  order: 2;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
@@ -118,13 +157,18 @@ header img {
   box-shadow: 0 6px 22px rgba(0, 0, 0, 0.12);
 }
 
-.content-text {
+.text-block {
   flex: 1;
   min-width: 320px;
   order: 1;
 }
 
-.content-text h3 {
+.text-block h3.mobility-heading {
+  margin-top: 2rem;
+  padding-top: 1rem;
+}
+
+.text-block h3 {
   font-size: 1.8rem;
   color: #004b4b;
   font-weight: 700;
@@ -132,17 +176,12 @@ header img {
   letter-spacing: 0.5px;
 }
 
-.content-text p {
+.text-block p {
   color: #444;
   font-size: 1.05rem;
   line-height: 1.8;
   text-align: justify;
   max-width: 600px;
-}
-
-.content-text:hover h3 {
-  color: #0c906d;
-  transition: color 0.3s ease;
 }
 
 /* ===== MOVING GALLERY ===== */
@@ -329,7 +368,7 @@ footer {
   width: 38px;
   height: 38px;
   margin: 5px;
-  border-radius: 50%;
+  border-radius: 30%;
   background: #ffffff10;
   transition: transform 0.3s, background 0.3s;
 }
@@ -353,7 +392,26 @@ footer img {
   margin-top: 1rem;
 }
 
-/* ===== INFO BOX / GALLERY ===== */
+/* GPS icon styling */
+.footer-gps {
+  margin-top: 1rem;
+}
+
+.footer-gps img {
+  width: 1.5in;
+  height: auto;
+  border-radius: 20%;
+  object-fit: contain;
+  opacity: 0.9;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.footer-gps img:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+/* ===== GALLERY ===== */
 .gallery-container {
   width: 100%;
   overflow: hidden;
@@ -395,33 +453,18 @@ footer img {
 
   .content-section img {
     width: 100%;
-    max-width: 100%;
     height: auto;
     order: unset;
   }
 
-  .content-text {
-    order: unset;
-  }
-
-  .content-text p {
+  .text-block p {
     text-align: center;
   }
 
-  header img {
-    width: 100px;
-  }
-  footer img {
-    width: 80px;
-  }
-  .carousel-track img {
-    width: 260px;
-    height: 170px;
-  }
-  .gallery-track img {
-    width: 240px;
-    height: 160px;
-  }
+  header img { width: 100px; }
+  footer img { width: 80px; }
+  .carousel-track img { width: 260px; height: 170px; }
+  .gallery-track img { width: 240px; height: 160px; }
 }
 
 @media (max-width: 560px) {

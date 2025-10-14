@@ -19,7 +19,6 @@
       <a href="#">Browse</a>
       <a href="insights.html">Insights</a>
       <a href="data.html">Data</a>
-    </nav>
       <i class="fas fa-search"></i>
       <i class="fas fa-cog"></i>
       <i class="fas fa-bars"></i>
@@ -31,7 +30,9 @@
     <div class="hero-text">
       <h1>Explore New York City Taxi Patterns</h1>
       <p>Visualize rides, understand traffic flows, and explore data shaping the next generation of urban mobility.</p>
-      <button><a href="insights.html"> Head to Insights</a></button>
+      <button class="insight-btn">
+        <a href="insights.html">Head to Insights</a>
+      </button>
     </div>
   </section>
 
@@ -43,7 +44,7 @@
         <p>
           New York City, a 24-hour metropolis, is home to one of the world’s most complex transportation networks. 
           Taxi analytics reveal how millions of micro-decisions—from drivers, passengers, and even weather—shape traffic efficiency, fuel consumption, and passenger accessibility.
-        </p>
+        </p><br>
 
         <h3>1. Understanding Mobility Dynamics</h3>
         <p>
@@ -59,7 +60,7 @@
     </section>
 
     <section class="content-section reverse">
-      <img src="../images/StockCake-Highway Night Lights_1759747474.jpg" alt="City Lights at Night" />
+      <img src="../images/pexels-ryan-millier-1693965-3229622.jpg" alt="City Lights at Night" />
       <div class="text-block">
         <h2>2. Real Data, Real Impact</h2>
         <p>
@@ -83,7 +84,7 @@
           These innovations are gradually leading toward a smart mobility ecosystem—connecting taxis, subways, e-bikes, and autonomous vehicles through shared digital infrastructure.
         </p>
       </div>
-      <img src="../images/GPS-Icon-PNG-Clip-Art-HD-Quality.png" alt="Analytics Visualization" />
+      <img src="../images/StockCake-Highway Night Lights_1759747474.jpg" alt="Analytics Visualization" />
     </section>
 
     <!-- MOVING GALLERY -->
@@ -140,55 +141,54 @@
   </main>
 
   <!-- FOOTER -->
-  <footer>
-    <div class="footer-container">
-      <div class="footer-logo">
-        <img src="../images/projext_logo101_cstmzd.png" alt="Footer Logo" class="logo-img" /><br />
-        NYC Taxi Data Visualization
-        <p>Empowering insights through open mobility data.</p>
-      </div>
-
-      <div class="footer-links">
-        <h3>Explore</h3>
-        <a href="index_II.html">Home</a>
-        <a href="#">Browse</a>
-        <a href="insights.html">Insights</a>
-        <a href="#">Data</a>
-      </div>
-
-      <div class="footer-socials">
-        <h3>Follow Us</h3>
-        <a href="#"><img src="../icons/icons8-facebook-50.png" alt="Facebook" /></a>
-        <a href="#"><img src="../icons/icons8-twitter-bird-50.png" alt="Twitter" /></a>
-        <a href="#"><img src="../icons/icons8-linkedin-circled-50.png" alt="LinkedIn" /></a>
-        <a href="#"><img src="../icons/icons8-instagram-50.png" alt="Instagram" /></a>
-        <a href="#"><img src="../icons/icons8-youtube-50.png" alt="YouTube" /></a>
-      </div>
+<footer>
+  <div class="footer-container">
+    <div class="footer-logo">
+      <img src="../images/projext_logo101_cstmzd.png" alt="Footer Logo" class="logo-img" /><br />
+      NYC Taxi Data Visualization
+      <p>Empowering insights through open mobility data.</p>
     </div>
 
-    <div class="footer-bottom">
-      <p>© 2025 NYC Metropolis Taxi Analytics | Built for Urban Mobility Insights</p>
+    <div class="footer-links">
+      <h3>Explore</h3>
+      <a href="index_II.html">Home</a>
+      <a href="#">Browse</a>
+      <a href="insights.html">Insights</a>
+      <a href="#">Data</a>
     </div>
-  </footer>
 
-  <button id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
-  <script src="https://kit.fontawesome.com/a2e0efb8f1.js" crossorigin="anonymous"></script>
-  <script>
+    <div class="footer-socials">
+      <h3>Follow Us</h3>
+      <a href="#"><img src="../icons/icons8-facebook-50.png" alt="Facebook" /></a>
+      <a href="#"><img src="../icons/icons8-twitter-bird-50.png" alt="Twitter" /></a>
+      <a href="#"><img src="../icons/icons8-linkedin-circled-50.png" alt="LinkedIn" /></a>
+      <a href="#"><img src="../icons/icons8-instagram-50.png" alt="Instagram" /></a>
+      <a href="#"><img src="../icons/icons8-youtube-50.png" alt="YouTube" /></a>
+
+      <!-- ✅ Added GPS Icon -->
+      <div class="footer-gps">
+        <img src="../images/GPS-Icon-PNG-Clip-Art-HD-Quality.png" alt="GPS Icon" />
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 NYC Metropolis Taxi Analytics | Built for Urban Mobility Insights</p>
+  </div>
+</footer>
+
+<button id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
+<script src="https://kit.fontawesome.com/a2e0efb8f1.js" crossorigin="anonymous"></script>
+<script>
 async function loadHomeData() {
   try {
     const res = await fetch("http://127.0.0.1:8000/api/");
     const data = await res.json();
     console.log("API Response:", data);
-
-
     document.querySelector("h1").textContent = data.Message;
   } catch (err) {
     console.error("Error fetching data:", err);
   }
 }
-
 loadHomeData();
 </script>
-
-</body>
-</html>
