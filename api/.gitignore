@@ -23,7 +23,6 @@ build/
 htmlcov/
 *.env
 *.venv
-*.csv
 *.json
 *.xml
 *.pot

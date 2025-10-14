@@ -6,7 +6,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
 from data.create_database.models import TaxiZones
-from data.create_database.base import Base
 
 # Setup database
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
