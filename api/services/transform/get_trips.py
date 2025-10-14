@@ -88,12 +88,12 @@ def shortest_trip() -> dict:
 def average_trip_summary() -> dict:
     """Get average trip information"""
     avg_distance = float(average_trip_distance())
-    avgs = average_total_price()
-    return {"average_trip_distance": f"{avg_distance:.3f} Km",
-            "highest_ticket_price": f"{avgs[1]:.2f}$",
-            "smallest_ticket_price": f"{avgs[2]:.2f}$",
-            "average_total_price": f"{avgs[0]:.2f}$",
-            "total_number_passanger": f"{avgs[3]} passangers"
+    average = average_total_price()
+    return {"average_trip_distance": f"{avg_distance:.3f} miles",
+            "highest_ticket_price": f"{average[1]:.2f}$",
+            "smallest_ticket_price": f"{average[2]:.2f}$",
+            "average_total_price": f"{average[0]:.2f}$",
+            "total_number_passanger": f"{average[3]:.0f} passangers"
             }
 
 def vendor_dominant_region() -> dict:

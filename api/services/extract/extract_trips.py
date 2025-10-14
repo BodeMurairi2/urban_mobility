@@ -66,8 +66,8 @@ def average_total_price():
     """find average total trip price and total passanger count"""
     clean_data = new_datatime_clean()
     positive_price = clean_data[clean_data["total_amount"] > 0]
-    return (clean_data["total_amount"].mean(),
-            clean_data["total_amount"].max(),
+    return (positive_price["total_amount"].mean(),
+            positive_price["total_amount"].max(),
             positive_price["total_amount"].min(),
             clean_data["passenger_count"].sum()
             )
