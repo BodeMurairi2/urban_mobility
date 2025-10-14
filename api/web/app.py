@@ -4,7 +4,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from controler.router import router as api_router
 
-app = FastAPI()
+app = FastAPI(
+    title="NYC Taxi Trip Analysis",
+    description="Dashboard API for NYC Yellow Taxi Dataset",
+    version="1.0.0",
+)
 
 origins = [
     "http://localhost:5500",
@@ -17,11 +21,6 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-)
-app = FastAPI(
-    title="NYC Taxi Trip Analysis",
-    description="Dashboard API for NYC Yellow Taxi Dataset",
-    version="1.0.0",
 )
 
 app.include_router(api_router, prefix="/api")
