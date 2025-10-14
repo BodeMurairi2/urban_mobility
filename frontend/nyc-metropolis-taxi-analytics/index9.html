@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NYC Taxi Data Visualization</title>
   <link rel="stylesheet" href="style9.css" />
-  <script src="https://kit.fontawesome.com/a2e0efb8f1.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <!-- HEADER -->
@@ -173,6 +172,23 @@
   </footer>
 
   <button id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
-  <script src="script9.js"></script>
+  <script src="https://kit.fontawesome.com/a2e0efb8f1.js" crossorigin="anonymous"></script>
+  <script>
+async function loadHomeData() {
+  try {
+    const res = await fetch("http://127.0.0.1:8000/api/");
+    const data = await res.json();
+    console.log("API Response:", data);
+
+
+    document.querySelector("h1").textContent = data.Message;
+  } catch (err) {
+    console.error("Error fetching data:", err);
+  }
+}
+
+loadHomeData();
+</script>
+
 </body>
 </html>

@@ -12,30 +12,7 @@ body {
   line-height: 1.6;
 }
 
-/* HEADER REPLACED WITH IMAGE */
-/*
-
-.image-header {
-  width: 70%;
-  height: 70px; 
-  background-color: #004b4b; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-  
-
-header img{
-  height: 70px; 
-  width: auto;
-  object-fit: contain;
-}
-*/
-
+/* HEADER */
 header {
   position: sticky;
   top: 0;
@@ -64,14 +41,13 @@ header img {
 /* HERO SECTION */
 .hero {
   background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.4)),
-    url('assets/images/my-taxi-hero.jpg')
-    center/cover no-repeat;
+    url('assets/images/my-taxi-hero.jpg') center/cover no-repeat;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 2rem;
+  padding: 4rem 2rem;
 }
 
 .hero-content {
@@ -114,7 +90,7 @@ header img {
 
 .info-section p {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 0 auto 1.5rem auto;
   font-size: 1rem;
   line-height: 1.7;
 }
@@ -127,6 +103,16 @@ header img {
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
+/* Chart canvas fix */
+canvas {
+  display: block;
+  width: 100% !important;
+  max-width: 800px;
+  height: 400px !important;
+  margin: 2rem auto;
+}
+
+/* LIGHT / DARK SECTIONS */
 .light {
   background: #f9f9f9;
 }
@@ -142,9 +128,8 @@ footer {
   padding: 3rem 2rem 1rem;
 }
 
-/* FOOTER LOGO ADDED */
 .footer-logo-img {
-  width: 120px; 
+  width: 120px;
   height: auto;
   margin-bottom: 0.5rem;
 }
