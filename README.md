@@ -2,13 +2,13 @@ Absolutely! Here’s a polished, visually appealing version of your README using
 
 ---
 
-# 🟡 NYC Yellow Taxi Data Analysis Web Application
+# NYC Yellow Taxi Data Analysis Web Application
 
 This project **analyzes and visualizes NYC Yellow Taxi data** through an interactive web application.
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 * **Frontend:** HTML5, CSS, JavaScript
 * **Backend:** FastAPI
@@ -16,7 +16,7 @@ This project **analyzes and visualizes NYC Yellow Taxi data** through an interac
 
 ---
 
-## 🚀 Setup Instructions
+## Setup Instructions
 
 ### 1️⃣ Clone the repository
 
