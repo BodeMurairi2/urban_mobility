@@ -84,6 +84,7 @@ python3 -m web.app
 
 ```bash
 # Open a new terminal
+# Open a new terminal
 cd urban_mobility/frontend/nyc-metropolis-taxi-analytics/
 python3 -m http.server 5500
 ```
