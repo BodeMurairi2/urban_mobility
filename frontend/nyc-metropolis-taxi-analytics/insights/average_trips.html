@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NYC Taxi Trip Statistics</title>
+  <link rel="stylesheet" href="../insights.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <a href="/" class="home-link">
+        <img src="../../images/projext_logo101_cstmzd.png" alt="NYC Taxi Analytics Logo" class="logo-img" />
+      </a>
+    </div>
+    <nav>
+      <a href="../index9.html">Home</a>
+      <a href="#">Browse</a>
+      <a href="insights.html" class="active">Insights</a>
+      <a href="data.html">Data</a>
+      <i class="fas fa-search"></i>
+      <i class="fas fa-cog"></i>
+      <i class="fas fa-bars"></i>
+    </nav>
+  </header>
+
+  <div class="background-overlay"></div>
+
+
+  <!-- POPUPS -->
+  <div class="popup search-popup" id="searchPopup">
+    <input type="text" placeholder="Search NYC Taxi Data..." />
+    <button>Search</button>
+  </div>
+
+  <div class="popup settings-popup" id="settingsPopup">
+    <h3>Settings</h3>
+    <label><input type="checkbox" /> Dark Mode</label>
+    <label><input type="checkbox" /> Enable Animations</label>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <!-- SIDE PANEL -->
+    <aside id="filters">
+      <h2>Insights</h2>
+      <nav class="side-nav">
+        <a href="../nyc-metropolis-taxi-analytics/insights/average_trips.html"><i class="fas fa-chart-line"></i> Average Trips</a>
+        <a href="../nyc-metropolis-taxi-analytics/insights/longest_trip.html"><i class="fas fa-route"></i> Longest Trip</a>
+        <a href="../nyc-metropolis-taxi-analytics/insights/shortest_trip.html"><i class="fas fa-road"></i> Shortest Trip</a>
+        <a href="../nyc-metropolis-taxi-analytics/insights/most_visited.html"><i class="fas fa-map-marker-alt"></i> Most Visited</a>
+        <a href="../nyc-metropolis-taxi-analytics/insights/passengers.html"><i class="fas fa-user-friends"></i> Passengers</a>
+        <a href="../nyc-metropolis-taxi-analytics/insights/vendors.html"><i class="fas fa-taxi"></i> Vendors</a>
+      </nav>
+      <a href="/" class="home-link">
+        <img src="../../images/projext_logo101_cstmzd.png" alt="Home Logo" class="home-link" /></a>
+    </aside>
+
+    <!-- DASHBOARD CONTENT -->
+    <section class="info-section light" id="averageStatsSection">
+      <h1>NYC Taxi Trip Statistics</h1>
+       <div class="stats-grid" id="statsGrid">
+        <!-- Stat cards will be injected here -->
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-logo">
+        <img src="../../images/projext_logo101_cstmzd.png" alt="Footer Logo" class="logo-img" /><br />
+        NYC Taxi Data Visualization
+        <p>Empowering insights through open mobility data.</p>
+      </div>
+
+      <div class="footer-links">
+        <h3>Explore</h3>
+        <a href="index_II.html">Home</a>
+        <a href="#">Browse</a>
+        <a href="insights.html">Insights</a>
+        <a href="#">Data</a>
+      </div>
+
+      <div class="footer-socials">
+        <h3>Follow Us</h3>
+        <a href="#"><img src="../../icons/icons8-facebook-50.png" alt="Facebook" /></a>
+        <a href="#"><img src="../../icons/icons8-twitter-bird-50.png" alt="Twitter" /></a>
+        <a href="#"><img src="../../icons/icons8-linkedin-circled-50.png" alt="LinkedIn" /></a>
+        <a href="#"><img src="../../icons/icons8-instagram-50.png" alt="Instagram" /></a>
+        <a href="#"><img src="../../icons/icons8-youtube-50.png" alt="YouTube" /></a>
+
+        <div class="footer-gps">
+          <img src="../../images/GPS-Icon-PNG-Clip-Art-HD-Quality.png" alt="GPS Icon" />
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 NYC Metropolis Taxi Analytics | Built for Urban Mobility Insights</p>
+    </div>
+  </footer>
+
+<script>
+  const API_BASE = "http://127.0.0.1:8000/api";
+
+  const statDefinitions = [
+    { key: 'average_trip_distance', title: 'Average Trip Distance', icon: 'fa-road' },
+    { key: 'highest_ticket_price', title: 'Highest Ticket Price', icon: 'fa-money-bill-wave' },
+    { key: 'smallest_ticket_price', title: 'Smallest Ticket Price', icon: 'fa-coins' },
+    { key: 'average_total_price', title: 'Average Total Price', icon: 'fa-dollar-sign' },
+    { key: 'total_number_passanger', title: 'Total Number of Passengers', icon: 'fa-users' }
+  ];
+
+  async function renderAverageStats() {
+    try {
+      const response = await fetch(`${API_BASE}/trips/average`);
+      const stats = await response.json();
+
+      const grid = document.getElementById('statsGrid');
+      grid.innerHTML = '';
+
+      statDefinitions.forEach(def => {
+        const card = document.createElement('div');
+        card.className = 'stat-card';
+        card.innerHTML = `
+          <i class="fas ${def.icon}"></i>
+          <div class="stat-title">${def.title}</div>
+          <div class="stat-value">${stats[def.key]}</div>
+        `;
+        grid.appendChild(card);
+      });
+
+    } catch (error) {
+      console.error('Error fetching average stats:', error);
+      const grid = document.getElementById('statsGrid');
+      grid.innerHTML = `<p style="color:red;">Failed to load stats.</p>`;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', renderAverageStats);
+</script>
+
+</body>
+</html>

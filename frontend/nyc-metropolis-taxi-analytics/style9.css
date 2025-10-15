@@ -34,27 +34,68 @@ header {
   z-index: 100;
 }
 
+/* Logo */
 .logo-img {
   height: 50px;
   width: auto;
   object-fit: contain;
 }
 
+/* Navigation layout */
 header nav {
   display: flex;
   align-items: center;
   gap: 1.5rem;
 }
 
-header nav a {
+/* Base link and icon styles */
+header nav a,
+header nav i {
   color: #fff;
   text-decoration: none;
   font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-header nav i {
-  color: #fff;
-  cursor: pointer;
+/* Interactive link styling */
+header nav a {
+  position: relative;
+  padding: 6px 10px;
+}
+
+/* Underline animation */
+header nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background-color: #ffc107; /* golden underline */
+  transition: width 0.3s ease;
+}
+
+/* Hover effects */
+header nav a:hover {
+  color: #ffc107;
+  transform: scale(1.05);
+  text-shadow: 0 0 8px rgba(255, 193, 7, 0.6);
+}
+
+header nav a:hover::after {
+  width: 100%;
+}
+
+/* Active page highlight */
+header nav a.active {
+  color: #ffc107;
+  border-bottom: 2px solid #ffc107;
+}
+
+/* Smooth mobile nav transitions if used */
+#navLinks {
+  transition: all 0.3s ease;
 }
 
 /* ===== HERO SECTION ===== */

@@ -1,3 +1,6 @@
+/* =========================================
+   GLOBAL STYLES
+========================================= */
 * {
   margin: 0;
   padding: 0;
@@ -6,59 +9,168 @@
 }
 
 body {
-  background-color: #f9fafb;
-  color: #222;
+  background: url("../images/StockCake-Highway\ Night\ Lights_1759747474.jpg")
+              no-repeat center center fixed;
+  background-size: cover;
+  color: #ffffff;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* HEADER */
-/* Logo image fit fix */
-header .logo img {
-  height: 45px;          
-  width: auto;           
-  object-fit: contain;   /* Prevent distortion */
-  display: block;        /* Align cleanly */
+.center-text {
+  text-align: center;
+  margin: 2rem 0;
+  color: #3690ac;
 }
 
+
+/* =========================================
+   HEADER
+========================================= */
 header {
+  position: sticky;
+  top: 0;
   background: #004b4b;
-  color: white;
-  padding: 1rem 2rem;
+  color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  padding: 0.7rem 2rem;
+  z-index: 100;
 }
 
-header .logo a {
-  color: white;
-  font-size: 1.3rem;
-  font-weight: bold;
-  text-decoration: none;
+/* Logo */
+.logo-img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
 }
 
-header nav a {
+/* Navigation layout */
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Base link and icon styles */
+header nav a,
+header nav i {
   color: #fff;
-  margin-left: 1rem;
   text-decoration: none;
   font-weight: 500;
-}
-
-header .icons i {
-  font-size: 1.3rem;
-  margin-left: 1rem;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
+/* Interactive link styling */
+header nav a {
+  position: relative;
+  padding: 6px 10px;
+}
+
+/* Underline animation */
+header nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background-color: #ffc107; /* golden underline */
+  transition: width 0.3s ease;
+}
+
+/* Hover effects */
+header nav a:hover {
+  color: #ffc107;
+  transform: scale(1.05);
+  text-shadow: 0 0 8px rgba(255, 193, 7, 0.6);
+}
+
+header nav a:hover::after {
+  width: 100%;
+}
+
+/* Active page highlight */
+header nav a.active {
+  color: #ffc107;
+  border-bottom: 2px solid #ffc107;
+}
+
+/* Smooth mobile nav transitions if used */
 #navLinks {
   transition: all 0.3s ease;
 }
 
-/* POPUPS */
+
+/* =========================================
+   BACKGROUND OVERLAY
+========================================= */
+.background-overlay {
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: -1;
+}
+
+/* =========================================
+   SIDE NAVIGATION (GLASS EFFECT)
+========================================= */
+aside#filters {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  padding: 1.5rem;
+  flex: 1;
+  max-width: 250px;
+  color: #004b4b;
+}
+
+/* SIDE NAV LINKS */
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.side-nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.6rem 0.8rem;
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  color: #003333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.side-nav a:hover {
+  background: rgba(0, 75, 75, 0.75);
+  color: #fff;
+  transform: translateX(5px);
+}
+
+.side-nav a.active {
+  background: #003f3f;
+  color: white;
+}
+
+/* =========================================
+   POPUPS
+========================================= */
 .popup {
   display: none;
   position: absolute;
@@ -78,7 +190,9 @@ header .icons i {
   margin-right: 0.5rem;
 }
 
-/* MAIN */
+/* =========================================
+   MAIN CONTENT
+========================================= */
 main {
   display: flex;
   flex: 1;
@@ -86,18 +200,16 @@ main {
   gap: 1rem;
 }
 
-aside#filters {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 1.5rem;
-  flex: 1;
-  max-width: 250px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
 aside h2 {
   margin-bottom: 1rem;
-  color: #004b4b;
+  color: #3690ac;
+}
+
+.home-link {
+  height: 1.5in;
+  width: auto;
+  object-fit: contain;
+  margin-top: 1rem;
 }
 
 label {
@@ -147,7 +259,9 @@ section#dashboard {
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* INFO SECTION */
+/* =========================================
+   INFO SECTION
+========================================= */
 .info {
   background: url("https://images.unsplash.com/photo-1533674689013-5f0e2f2bca94?auto=format&fit=crop&w=1400&q=80") center/cover;
   color: white;
@@ -166,7 +280,9 @@ section#dashboard {
   font-size: 1.1rem;
 }
 
-/* SCROLL TO TOP */
+/* =========================================
+   SCROLL TO TOP BUTTON
+========================================= */
 #scrollTopBtn {
   position: fixed;
   bottom: 25px;
@@ -180,32 +296,147 @@ section#dashboard {
   display: none;
 }
 
-/* FOOTER */
+/* =========================================
+   FOOTER
+========================================= */
 footer {
-  background: #004b4b;
-  color: white;
-  text-align: center;
-  padding: 2rem 1rem;
+  background: #003f3f;
+  color: #e8e8e8;
+  padding: 3rem 2rem 1rem;
+  margin-top: auto;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.footer-content {
+.footer-container {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: space-around;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 2.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 2rem;
+}
+
+.footer-section {
+  min-width: 200px;
+}
+
+.footer-section h3 {
+  font-size: 1.1rem;
+  color: #ffffff;
   margin-bottom: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-left: 3px solid #ffc107;
+  padding-left: 8px;
 }
 
 .footer-links a {
-  color: white;
-  text-decoration: none;
   display: block;
-  margin-bottom: 0.5rem;
+  color: #cfd8dc;
+  text-decoration: none;
+  margin-bottom: 0.6rem;
+  font-size: 0.95rem;
+  transition: color 0.3s;
 }
 
-.footer-social a {
-  color: white;
-  font-size: 1.5rem;
-  margin: 0 0.5rem;
+.footer-links a:hover {
+  color: #ffc107;
+}
+
+.footer-socials img {
+  width: 38px;
+  height: 38px;
+  margin: 5px;
+  border-radius: 30%;
+  background: #ffffff10;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.footer-socials img:hover {
+  transform: scale(1.15);
+  background: #ffffff20;
+}
+
+footer img {
+  width: 100px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 0.8rem;
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #b0bec5;
+  margin-top: 1rem;
+}
+
+.footer-gps {
+  margin-top: 1rem;
+}
+
+.footer-gps img {
+  width: 1.5in;
+  height: auto;
+  border-radius: 20%;
+  object-fit: contain;
+  opacity: 0.9;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.footer-gps img:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+/* =========================================
+   PLACEHOLDER
+========================================= */
+.placeholder {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.placeholder img {
+  width: 80%;
+  max-width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+@media (max-width: 980px) {
+  .content-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 3rem 1.5rem;
+  }
+
+  .content-section img {
+    width: 100%;
+    height: auto;
+  }
+
+  .text-block p {
+    text-align: center;
+  }
+
+  header img { width: 100px; }
+  footer img { width: 80px; }
+  .carousel-track img { width: 260px; height: 170px; }
+  .gallery-track img { width: 240px; height: 160px; }
+}
+
+@media (max-width: 560px) {
+  header { padding: 0.6rem 1rem; }
+  .hero { padding: 5.5rem 1rem; }
+  .hero h1 { font-size: 1.9rem; }
+  header img { width: 84px; }
+  footer img { width: 70px; }
+  .carousel-track img { width: 220px; height: 150px; }
+  .gallery-track img { width: 200px; height: 140px; }
+  .footer-socials img { width: 32px; height: 32px; }
 }

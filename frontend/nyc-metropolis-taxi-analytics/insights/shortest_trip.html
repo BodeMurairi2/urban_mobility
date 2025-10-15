@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shortest NYC Taxi Trips</title>
+  <link rel="stylesheet" href="../insights.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+    <header>
+    <div class="logo">
+      <a href="/" class="home-link">
+        <img src="../../images/projext_logo101_cstmzd.png" alt="NYC Taxi Analytics Logo" class="logo-img" />
+      </a>
+    </div>
+    <nav>
+      <a href="index9.html">Home</a>
+      <a href="#">Browse</a>
+      <a href="insights.html" class="active">Insights</a>
+      <a href="data.html">Data</a>
+      <i class="fas fa-search"></i>
+      <i class="fas fa-cog"></i>
+      <i class="fas fa-bars"></i>
+    </nav>
+  </header>
+
+  <div class="background-overlay"></div>
+
+
+  <!-- POPUPS -->
+  <div class="popup search-popup" id="searchPopup">
+    <input type="text" placeholder="Search NYC Taxi Data..." />
+    <button>Search</button>
+  </div>
+
+  <div class="popup settings-popup" id="settingsPopup">
+    <h3>Settings</h3>
+    <label><input type="checkbox" /> Dark Mode</label>
+    <label><input type="checkbox" /> Enable Animations</label>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <!-- SIDE PANEL -->
+    <aside id="filters">
+      <h2>Insights</h2>
+      <nav class="side-nav">
+        <a href="../nyc-metropolis-taxi-analytics/insights/average_trips.html"><i class="fas fa-chart-line"></i> Average Trips</a>
+        <a href="../nyc-metropolis-taxi-analytics/insights/longest_trip.html"><i class="fas fa-route"></i> Longest Trip</a>
+        <a href="../nyc-metropolis-taxi-analytics/insights/shortest_trip.html"><i class="fas fa-road"></i> Shortest Trip</a>
+        <a href="../nyc-metropolis-taxi-analytics/insights/most_visited.html"><i class="fas fa-map-marker-alt"></i> Most Visited</a>
+        <a href="../nyc-metropolis-taxi-analytics/insights/passengers.html"><i class="fas fa-user-friends"></i> Passengers</a>
+        <a href="../nyc-metropolis-taxi-analytics/insights/vendors.html"><i class="fas fa-taxi"></i> Vendors</a>
+      </nav>
+      <a href="/" class="home-link">
+        <img src="../../images/projext_logo101_cstmzd.png" alt="Home Logo" class="home-link" /></a>
+    </aside>
+
+    <!-- DASHBOARD CONTENT -->
+
+    <section class="info-section light" id="shortestTripSection">
+      <h1>Shortest NYC Taxi Trip</h1>
+    </section>
+
+    <section class="trip-container">
+      <div class="trip-card" id="tripCard">
+        <!-- Trip info injected by JS -->
+      </div>
+    </section>
+  </main>
+
+    <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-logo">
+        <img src="../../images/projext_logo101_cstmzd.png" alt="Footer Logo" class="logo-img" /><br />
+        NYC Taxi Data Visualization
+        <p>Empowering insights through open mobility data.</p>
+      </div>
+
+      <div class="footer-links">
+        <h3>Explore</h3>
+        <a href="index_II.html">Home</a>
+        <a href="#">Browse</a>
+        <a href="insights.html">Insights</a>
+        <a href="#">Data</a>
+      </div>
+
+      <div class="footer-socials">
+        <h3>Follow Us</h3>
+        <a href="#"><img src="../../icons/icons8-facebook-50.png" alt="Facebook" /></a>
+        <a href="#"><img src="../../icons/icons8-twitter-bird-50.png" alt="Twitter" /></a>
+        <a href="#"><img src="../../icons/icons8-linkedin-circled-50.png" alt="LinkedIn" /></a>
+        <a href="#"><img src="../../icons/icons8-instagram-50.png" alt="Instagram" /></a>
+        <a href="#"><img src="../../icons/icons8-youtube-50.png" alt="YouTube" /></a>
+
+        <div class="footer-gps">
+          <img src="../../images/GPS-Icon-PNG-Clip-Art-HD-Quality.png" alt="GPS Icon" />
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 NYC Metropolis Taxi Analytics | Built for Urban Mobility Insights</p>
+    </div>
+  </footer>
+
+
+<script>
+  const API_BASE = "http://127.0.0.1:8000/api";
+
+  async function renderTripCard() {
+    try {
+      const response = await fetch(`${API_BASE}/trips/shortest`);
+      const trips = await response.json();
+      const trip = trips[0]; // Take the first trip
+
+      const container = document.getElementById('tripCard');
+
+      // Use a reliable taxi image
+      const img = document.createElement('img');
+      img.src = 'https://images.unsplash.com/photo-1650658358245-06ccf24d9667?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fE5ZQyUyMHllbGxvdyUyMHRheGl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=500';
+      img.alt = 'NYC Taxi';
+      container.appendChild(img);
+
+      const infoDiv = document.createElement('div');
+      infoDiv.className = 'trip-info';
+      infoDiv.innerHTML = `
+        <span><strong>Pickup Zone:</strong> ${trip.PULocationZone}</span>
+        <span><strong>Pickup Location:</strong> ${trip.PULocationName}</span>
+        <span><strong>Dropoff Location ID:</strong> ${trip.DOLocationID}</span>
+        <span><strong>Passenger Count:</strong> ${trip.passenger_count}</span>
+        <span><strong>Trip Distance:</strong> ${trip.trip_distance} miles</span>
+        <span><strong>Fare Amount:</strong> $${trip.fare_amount.toFixed(2)}</span>
+        <span><strong>Payment Type:</strong> ${trip.payment_type}</span>
+        <span><strong>Pickup Time:</strong> ${new Date(trip.tpep_pickup_datetime).toLocaleString()}</span>
+      `;
+      container.appendChild(infoDiv);
+
+    } catch (error) {
+      console.error('Error fetching trip:', error);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', renderTripCard);
+</script>
+
+</body>
+</html>

@@ -3,37 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NYC Metropolis Taxi Analytics</title>
+  <title>Insights | NYC Metropolis Taxi Analytics</title>
   <link rel="stylesheet" href="insights.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-  <!-- Header -->
+  <!-- HEADER -->
   <header>
     <div class="logo">
       <a href="/" class="home-link">
-      <img src="../images/projext_logo101_cstmzd.png" alt="My NYC Taxi Analytics Logo" class="logo">
+        <img src="../images/projext_logo101_cstmzd.png" alt="NYC Taxi Analytics Logo" class="logo-img" />
       </a>
     </div>
-
-    <nav class="nav-links" id="navLinks">
+    <nav>
       <a href="index9.html">Home</a>
-      <a href="insights.html">Insights</a>
-      <a href="data.html">Data</a>
       <a href="#">Browse</a>
+      <a href="insights.html" class="active">Insights</a>
+      <a href="data.html">Data</a>
+      <i class="fas fa-search"></i>
+      <i class="fas fa-cog"></i>
+      <i class="fas fa-bars"></i>
     </nav>
-
-    <div class="icons">
-      <i class="fas fa-search" id="searchIcon"></i>
-      <i class="fas fa-cog" id="settingsIcon"></i>
-      <i class="fas fa-bars" id="menuToggle"></i>
-    </div>
   </header>
 
-  <!-- Search & Settings Popups -->
+  <div class="background-overlay"></div>
+
+
+  <!-- POPUPS -->
   <div class="popup search-popup" id="searchPopup">
     <input type="text" placeholder="Search NYC Taxi Data..." />
     <button>Search</button>
@@ -45,88 +45,70 @@
     <label><input type="checkbox" /> Enable Animations</label>
   </div>
 
-  <!-- Main Content -->
+  <!-- MAIN CONTENT -->
   <main>
+    <!-- SIDE PANEL -->
     <aside id="filters">
-      <h2>Filters</h2>
-      <label>Time:
-        <select id="timeFilter">
-          <option value="all">All</option>
-          <option value="morning">Morning</option>
-          <option value="afternoon">Afternoon</option>
-          <option value="evening">Evening</option>
-        </select>
-      </label>
-
-      <label>Distance:
-        <input type="range" id="distanceFilter" min="0" max="30" step="1" />
-        <span id="distanceValue">0–30 km</span>
-      </label>
-
-      <label>Fare:
-        <input type="range" id="fareFilter" min="0" max="100" step="5" />
-        <span id="fareValue">0–100 USD</span>
-      </label>
-
-      <button id="applyFilters">Apply Filters</button>
+      <h2>Insights</h2>
+      <nav class="side-nav">
+        <a href="../nyc-metropolis-taxi-analytics/insights/average_trips.html"><i class="fas fa-chart-line"></i> Average Trips</a>
+        <a href="../nyc-metropolis-taxi-analytics/insights/longest_trip.html"><i class="fas fa-route"></i> Longest Trip</a>
+        <a href="../nyc-metropolis-taxi-analytics/insights/shortest_trip.html"><i class="fas fa-road"></i> Shortest Trip</a>
+        <a href="../nyc-metropolis-taxi-analytics/insights/most_visited.html"><i class="fas fa-map-marker-alt"></i> Most Visited</a>
+        <a href="../nyc-metropolis-taxi-analytics/insights/passengers.html"><i class="fas fa-user-friends"></i> Passengers</a>
+        <a href="../nyc-metropolis-taxi-analytics/insights/vendors.html"><i class="fas fa-taxi"></i> Vendors</a>
+      </nav>
+      <a href="/" class="home-link">
+        <img src="../images/projext_logo101_cstmzd.png" alt="Home Logo" class="home-link" /></a>
     </aside>
 
+    <!-- DASHBOARD CONTENT -->
     <section id="dashboard">
-      <div id="map"></div>
-
-      <div id="stats">
-        <div class="card">
-          <h3>Total Trips</h3>
-          <p id="totalTrips">–</p>
-        </div>
-        <div class="card">
-          <h3>Average Fare</h3>
-          <p id="avgFare">–</p>
-        </div>
-        <div class="card">
-          <h3>Average Distance</h3>
-          <p id="avgDistance">–</p>
-        </div>
+        <h2 class="center-text">Welcome to Taxi Insights</h2>
+      <p>Select a category on the left to explore New York City’s taxi data — from average trips and fares to passenger behavior and vendor comparisons.</p>
+      <div class="placeholder">
+        <img src="../images/pexels-hannibal-photography-2086508689-33534028.jpg" alt="NYC Taxi Map" />
       </div>
-
-      <canvas id="fareChart"></canvas>
-
-      <!-- Long engaging section -->
-      <section class="info">
-        <h2>Urban Mobility and NYC Taxi Patterns</h2>
-        <p>Explore how millions of daily trips define New York City's rhythm. This dashboard visualizes mobility, sustainability, and efficiency trends based on real data.</p>
-        <div class="image-bg"></div>
-      </section>
     </section>
   </main>
 
-  <!-- Scroll to Top Button -->
+  <!-- SCROLL TO TOP -->
   <button id="scrollTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
 
-  <!-- Footer -->
+  <!-- FOOTER -->
   <footer>
-    <div class="footer-content">
+    <div class="footer-container">
       <div class="footer-logo">
-        <h3>NYC Taxi Data Visualization</h3>
-        <p>Empowering smarter cities through mobility insights.</p>
+        <img src="../images/projext_logo101_cstmzd.png" alt="Footer Logo" class="logo-img" /><br />
+        NYC Taxi Data Visualization
+        <p>Empowering insights through open mobility data.</p>
       </div>
 
       <div class="footer-links">
+        <h3>Explore</h3>
         <a href="index_II.html">Home</a>
-        <a href="#">Data</a>
+        <a href="#">Browse</a>
         <a href="insights.html">Insights</a>
-        <a href="#">Contact</a>
+        <a href="#">Data</a>
       </div>
 
-      <div class="footer-social">
-        <a href="#"><i class="fas fa-envelope"></i></a>
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-x-twitter"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
+      <div class="footer-socials">
+        <h3>Follow Us</h3>
+        <a href="#"><img src="../icons/icons8-facebook-50.png" alt="Facebook" /></a>
+        <a href="#"><img src="../icons/icons8-twitter-bird-50.png" alt="Twitter" /></a>
+        <a href="#"><img src="../icons/icons8-linkedin-circled-50.png" alt="LinkedIn" /></a>
+        <a href="#"><img src="../icons/icons8-instagram-50.png" alt="Instagram" /></a>
+        <a href="#"><img src="../icons/icons8-youtube-50.png" alt="YouTube" /></a>
+
+        <div class="footer-gps">
+          <img src="../images/GPS-Icon-PNG-Clip-Art-HD-Quality.png" alt="GPS Icon" />
+        </div>
       </div>
     </div>
-    <p>© 2025 NYC Metropolis Taxi Analytics | Built for Urban Mobility Insights</p>
+
+    <div class="footer-bottom">
+      <p>© 2025 NYC Metropolis Taxi Analytics | Built for Urban Mobility Insights</p>
+    </div>
   </footer>
 
   <script src="script_II.js"></script>
