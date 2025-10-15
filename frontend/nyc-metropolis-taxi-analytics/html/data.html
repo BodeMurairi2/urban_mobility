@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insights - NYC Taxi Data Visualization</title>
+  <link rel="stylesheet" href="../css/data.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <a href="/" class="home-link">
+        <img src="../images/projext_logo101_cstmzd.png" alt="NYC Taxi Analytics Logo" class="logo-img" />
+      </a>
+    </div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="#">Browse</a>
+      <a href="insights.html">Insights</a>
+      <a href="data.html">Data</a>
+    </nav>
+      <i class="fas fa-search"></i>
+      <i class="fas fa-cog"></i>
+      <i class="fas fa-bars"></i>
+    </nav>
+  </header>
+
+<section class="info-section light">
+  <h1>Insights Dashboard</h1>
+  <p>Welcome to the insights page! Here you’ll soon find dynamic visualizations that highlight trip patterns, fares, and environmental trends using real NYC taxi data.</p>
+  <img src="https://images.unsplash.com/photo-1486308510493-aa64833634ef?auto=format&fit=crop&w=1200&q=80" alt="City analytics">
+</section>
+
+
+<section class="info-section dark">
+  <h2>Coming Features</h2>
+  <ul style="text-align:left; max-width:600px; margin:auto;">
+    <li>📊 Interactive fare and distance visualizations</li>
+    <li>🌆 Heat maps of pickup and dropoff locations</li>
+    <li>🕐 Temporal insights (peak hours, busiest days)</li>
+    <li>🚗 Comparison between ride durations and costs</li>
+  </ul>
+</section>
+
+<footer>
+    <div class="footer-container">
+    <div class="footer-logo">
+      <img src="../images/projext_logo101_cstmzd.png" alt="NYC Taxi Analytics Logo" class="footer-logo-img" />
+      <p>NYC Taxi Analytics — Empowering smarter urban mobility decisions.</p>
+    </div>
+    <div class="footer-links">
+      <h3>Explore</h3>
+      <a href="../index.html">Home</a>
+      <a href="#">Browse</a>
+      <a href="insights.html">Insights</a>
+      <a href="data.html">Data</a>
+    </div>
+    <div class="footer-socials">
+      <h3>Follow Us</h3>
+      <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+      <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+      <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+    </div>
+  </div>
+  <p class="footer-bottom">© 2025 NYC Metropolis Taxi Analytics | Inspired by WRI.org</p>
+</footer>
+
+<button id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const API_BASE = "http://127.0.0.1:8000/api";
+
+  // Optional mapping from DOLocationID to borough name (fill in your own mapping if available)
+  const locationMap = {
+    68: "Bronx",
+    161: "Manhattan",
+    162: "Queens",
+    163: "Brooklyn",
+    170: "JFK Airport",
+    230: "LaGuardia Airport",
+    234: "Staten Island",
+    236: "Brooklyn",
+    237: "Queens",
+    239: "Manhattan"
+  };
+
+  async function renderMostVisitedChart() {
+    try {
+      const response = await fetch(`${API_BASE}/visit/most_trips`);
+      const data = await response.json();
+      console.log("Fetched data:", data);
+
+      const labels = data.map(item => locationMap[item.DOLocationID] || `ID ${item.DOLocationID}`);
+      const values = data.map(item => item.NumTrips);
+
+      const ctx = document.getElementById("mostVisitedChart").getContext("2d");
+
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "Number of Trips",
+            data: values,
+            backgroundColor: "rgba(54, 162, 235, 0.7)"
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: true },
+            title: { display: true, text: "Most Visited Places by Trips" }
+          }
+        }
+      });
+    } catch (error) {
+      console.error("Error rendering chart:", error);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", renderMostVisitedChart);
+</script>
+
+</body>
+</html>
