@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Longest NYC Taxi Trip</title>
+  <link rel="stylesheet" href="../css/insight_data.css">
+  <style>
+    /* Shortest/Longest Trip Section Styling */
+    #longestTripSection {
+      padding-top: 2rem;
+      padding-bottom: 1rem;
+    }
+
+    #longestTripSection h1 {
+      margin-bottom: 10px; /* Reduce space between heading and card */
+    }
+
+    .trip-container {
+      display: flex;
+      justify-content: center;
+      margin: 10px 0 40px 0;
+    }
+
+    .trip-card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+      max-width: 400px;
+      width: 90%;
+      text-align: left;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .trip-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    }
+
+    .trip-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .trip-info span {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .trip-info strong {
+      color: #007777;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <a href="/" class="home-link">
+      <img src="../images/projext_logo101_cstmzd.png" alt="NYC Taxi Analytics Logo" class="logo-img" />
+    </a>
+  </div>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="#">Browse</a>
+    <a href="insights.html">Insights</a>
+    <a href="data.html">Data</a>
+  </nav>
+</header>
+
+<section class="info-section light" id="longestTripSection">
+  <h1>Longest NYC Taxi Trip</h1>
+</section>
+
+<section class="trip-container">
+  <div class="trip-card" id="tripCard">
+    <!-- Trip info will be injected here -->
+  </div>
+</section>
+
+<script>
+  const API_BASE = "http://127.0.0.1:8000/api";
+
+  async function renderLongestTripCard() {
+    try {
+      const response = await fetch(`${API_BASE}/trips/longest`);
+      const trips = await response.json();
+      const trip = trips[0]; // Take the first trip
+
+      const container = document.getElementById('tripCard');
+
+      // Taxi image for visual
+      const img = document.createElement('img');
+      img.src = 'https://images.unsplash.com/photo-1758440641988-b731035f0f49?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8TGluY29sbiUyMFNxdWFyZSUyMFdlc3R8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=500';
+      img.alt = 'NYC Taxi';
+      container.appendChild(img);
+
+      const infoDiv = document.createElement('div');
+      infoDiv.className = 'trip-info';
+
+      // Convert trip_duration from seconds to hh:mm:ss
+      const seconds = trip.trip_duration;
+      const h = Math.floor(seconds / 3600);
+      const m = Math.floor((seconds % 3600) / 60);
+      const s = seconds % 60;
+      const durationStr = `${h}h ${m}m ${s}s`;
+
+      infoDiv.innerHTML = `
+        <span><strong>Pickup Zone:</strong> ${trip.PULocationZone}</span>
+        <span><strong>Pickup Location:</strong> ${trip.PULocationName}</span>
+        <span><strong>Dropoff Zone:</strong> ${trip.DOLocationZone}</span>
+        <span><strong>Dropoff Location:</strong> ${trip.DOLocationName}</span>
+        <span><strong>Passenger Count:</strong> ${trip.passenger_count}</span>
+        <span><strong>Trip Distance:</strong> ${trip.trip_distance.toLocaleString()} miles</span>
+        <span><strong>Fare Amount:</strong> $${trip.fare_amount.toFixed(2)}</span>
+        <span><strong>Payment Type:</strong> ${trip.payment_type}</span>
+        <span><strong>Pickup Time:</strong> ${new Date(trip.tpep_pickup_datetime).toLocaleString()}</span>
+        <span><strong>Trip Duration:</strong> ${durationStr}</span>
+      `;
+      container.appendChild(infoDiv);
+
+    } catch (error) {
+      console.error('Error fetching longest trip:', error);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', renderLongestTripCard);
+</script>
+
+</body>
+</html>

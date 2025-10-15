@@ -4,80 +4,91 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Insights - NYC Taxi Data Visualization</title>
-  <link rel="stylesheet" href="../insights.css">
+  <link rel="stylesheet" href="../css/insight_data.css">
+  <style>
+    /* Cards for most visited places */
+    .places-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .place-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .place-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    }
+
+    .place-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .place-info {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .place-info span {
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .place-info strong {
+      color: #007777;
+    }
+
+    .place-description {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 5px;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-    <header>
+  <header>
     <div class="logo">
       <a href="/" class="home-link">
-        <img src="../../images/projext_logo101_cstmzd.png" alt="NYC Taxi Analytics Logo" class="logo-img" />
+        <img src="../images/projext_logo101_cstmzd.png" alt="NYC Taxi Analytics Logo" class="logo-img" />
       </a>
     </div>
     <nav>
-      <a href="index9.html">Home</a>
+      <a href="../index.html">Home</a>
       <a href="#">Browse</a>
-      <a href="insights.html" class="active">Insights</a>
+      <a href="insights.html">Insights</a>
       <a href="data.html">Data</a>
-      <i class="fas fa-search"></i>
-      <i class="fas fa-cog"></i>
-      <i class="fas fa-bars"></i>
     </nav>
   </header>
 
-  <div class="background-overlay"></div>
+  <section class="info-section light">
+    <h1>Insights Dashboard</h1>
+    <p>Welcome to the insights page! Here you’ll soon find dynamic visualizations that highlight trip patterns, fares, and environmental trends using real NYC taxi data.</p>
+    <img src="https://images.unsplash.com/photo-1486308510493-aa64833634ef?auto=format&fit=crop&w=1200&q=80" alt="City analytics">
+  </section>
 
+  <section class="info-section dark">
+    <h2>Most Visited Places by Trips</h2>
+    <canvas id="mostVisitedChart"></canvas>
 
-  <!-- POPUPS -->
-  <div class="popup search-popup" id="searchPopup">
-    <input type="text" placeholder="Search NYC Taxi Data..." />
-    <button>Search</button>
-  </div>
-
-  <div class="popup settings-popup" id="settingsPopup">
-    <h3>Settings</h3>
-    <label><input type="checkbox" /> Dark Mode</label>
-    <label><input type="checkbox" /> Enable Animations</label>
-  </div>
-
-  <!-- MAIN CONTENT -->
-  <main>
-    <!-- SIDE PANEL -->
-    <aside id="filters">
-      <h2>Insights</h2>
-      <nav class="side-nav">
-        <a href="../nyc-metropolis-taxi-analytics/insights/average_trips.html"><i class="fas fa-chart-line"></i> Average Trips</a>
-        <a href="../nyc-metropolis-taxi-analytics/insights/longest_trip.html"><i class="fas fa-route"></i> Longest Trip</a>
-        <a href="../nyc-metropolis-taxi-analytics/insights/shortest_trip.html"><i class="fas fa-road"></i> Shortest Trip</a>
-        <a href="../nyc-metropolis-taxi-analytics/insights/most_visited.html"><i class="fas fa-map-marker-alt"></i> Most Visited</a>
-        <a href="../nyc-metropolis-taxi-analytics/insights/passengers.html"><i class="fas fa-user-friends"></i> Passengers</a>
-        <a href="../nyc-metropolis-taxi-analytics/insights/vendors.html"><i class="fas fa-taxi"></i> Vendors</a>
-      </nav>
-      <a href="/" class="home-link">
-        <img src="../../images/projext_logo101_cstmzd.png" alt="Home Logo" class="home-link" /></a>
-    </aside>
-
-    <!-- DASHBOARD CONTENT -->
-
-    <section class="info-section light">
-      <h1>Insights Dashboard</h1>
-      <p>Welcome to the insights page! Here you’ll soon find dynamic visualizations that highlight trip patterns, fares, and environmental trends using real NYC taxi data.</p>
-      <img src="https://images.unsplash.com/photo-1486308510493-aa64833634ef?auto=format&fit=crop&w=1200&q=80" alt="City analytics">
-    </section>
-
-    <section class="info-section dark">
-      <h2>Most Visited Places by Trips</h2>
-      <canvas id="mostVisitedChart"></canvas>
-
-      <!-- Container for cards -->
-      <div class="places-container" id="placesContainer">
-        <!-- Place cards injected by JS -->
-      </div>
-    </section>
-  </main>  
-
-
+    <!-- Container for cards -->
+    <div class="places-container" id="placesContainer">
+      <!-- Place cards injected by JS -->
+    </div>
+  </section>
 
   <section class="info-section dark">
     <h2>Coming Features</h2>
@@ -89,40 +100,28 @@
     </ul>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-container">
       <div class="footer-logo">
-        <img src="../../images/projext_logo101_cstmzd.png" alt="Footer Logo" class="logo-img" /><br />
-        NYC Taxi Data Visualization
-        <p>Empowering insights through open mobility data.</p>
+        <img src="../images/projext_logo101_cstmzd.png" alt="NYC Taxi Analytics Logo" class="footer-logo-img" />
+        <p>NYC Taxi Analytics — Empowering smarter urban mobility decisions.</p>
       </div>
-
       <div class="footer-links">
         <h3>Explore</h3>
-        <a href="index_II.html">Home</a>
+        <a href="../index.html">Home</a>
         <a href="#">Browse</a>
         <a href="insights.html">Insights</a>
-        <a href="#">Data</a>
+        <a href="data.html">Data</a>
       </div>
-
       <div class="footer-socials">
         <h3>Follow Us</h3>
-        <a href="#"><img src="../../icons/icons8-facebook-50.png" alt="Facebook" /></a>
-        <a href="#"><img src="../../icons/icons8-twitter-bird-50.png" alt="Twitter" /></a>
-        <a href="#"><img src="../../icons/icons8-linkedin-circled-50.png" alt="LinkedIn" /></a>
-        <a href="#"><img src="../../icons/icons8-instagram-50.png" alt="Instagram" /></a>
-        <a href="#"><img src="../../icons/icons8-youtube-50.png" alt="YouTube" /></a>
-
-        <div class="footer-gps">
-          <img src="../../images/GPS-Icon-PNG-Clip-Art-HD-Quality.png" alt="GPS Icon" />
-        </div>
+        <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+        <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
       </div>
     </div>
-
-    <div class="footer-bottom">
-      <p>© 2025 NYC Metropolis Taxi Analytics | Built for Urban Mobility Insights</p>
-    </div>
+    <p class="footer-bottom">© 2025 NYC Metropolis Taxi Analytics | Inspired by WRI.org</p>
   </footer>
 
   <button id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
