@@ -84,7 +84,7 @@ python3 -m web.app
 
 ```bash
 # Open a new terminal
-cd urban_mobility/frontend
+cd urban_mobility/frontend/nyc-metropolis-taxi-analytics/
 python3 -m http.server 5500
 ```
 
@@ -94,8 +94,6 @@ python3 -m http.server 5500
 http://127.0.0.1:5500
 open index.html
 ```
-
----
 
 ## Project Structure
 
