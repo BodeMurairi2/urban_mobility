@@ -6,6 +6,9 @@ This project **analyzes and visualizes NYC Yellow Taxi data** through an interac
 
 ---
 
+## Video Presentation
+Link: https://youtu.be/Xak9DxeP_M8
+
 ## Technology Stack
 
 * **Frontend:** HTML5, CSS, JavaScript
