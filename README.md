@@ -2,9 +2,18 @@
 
 # NYC Yellow Taxi Data Analysis Web Application
 
-This project **analyzes and visualizes NYC Yellow Taxi data** through an interactive web application.
+This project **analyzes and visualizes NYC Yellow Taxi data** through an interactive web application. Please read and follow each step carefully.
 
 ---
+## Video Presentation
+Link: https://youtu.be/Xak9DxeP_M8
+
+## Link to the documentation
+Link https://docs.google.com/document/d/1BFFyp-8KrrF6fp8xCNjIDEi-zjtFKBDLrUf7OTnEiD4/edit?usp=sharing
+
+## System Architecture
+cd urban_mobility/system_architecture/
+Urban Mobility System Architecture.jpg
 
 ## Technology Stack
 
@@ -30,7 +39,7 @@ cd urban_mobility/
 **Backend:**
 
 ```bash
-# Run backend setup script
+# Run backend setup script at the root of the repository
 ./setup_backend_environment.sh
 ```
 
@@ -44,8 +53,7 @@ cd urban_mobility/
 **Visit the application:**
 
 ```
-http://127.0.0.1:5500/
-open index.html
+http://127.0.0.1:5500
 ```
 
 ---
@@ -55,8 +63,20 @@ open index.html
 **Backend Setup:**
 
 ```bash
-# Create and activate virtual environment
-python3 -m venv venv
+# using cmd termianl, change to project repository
+cd urban_mobility/
+run:
+windows_setup.cmd
+to reopen the backend server:
+cd urban_mobility/api/
+check if virtual environment is open. If not,:
+inside urban_mobility/, run:
+.\venv\Scripts\activate, then
+cd api/, run:
+python -m web.app
+
+# using git bash terminal, run the following commands
+python -m venv venv
 source venv/Scripts/activate
 
 # Upgrade pip and install dependencies
@@ -64,18 +84,18 @@ pip install --upgrade pip
 pip install -r requirements.txt
 
 # Build the database
-python3 api/data/create_database/create_database.py
+python api/data/create_database/create_database.py
 
 # Navigate to API directory and populate data
 cd api/
-python3 -m data.save_location.save_location_zone
-python3 -m data.save_location.save_payment
-python3 -m data.save_location.save_ratecode
-python3 -m data.save_location.save_vendor
-python3 -m data.save_location.save_trips
+python -m data.save_location.save_location_zone
+python -m data.save_location.save_payment
+python -m data.save_location.save_ratecode
+python -m data.save_location.save_vendor
+python -m data.save_location.save_trips
 
 # Start backend server
-python3 -m web.app
+python -m web.app
 ```
 
 **Frontend Setup:**
@@ -83,14 +103,20 @@ python3 -m web.app
 ```bash
 # Open a new terminal
 cd frontend/nyc-metropolis-taxi-analytics/
-python3 -m http.server 5500
+python -m http.server 5500
 ```
 
 **Frontend URL:**
 
 ```
+cd frontend/nyc-metropolis-taxi-analytics/  # using git bash terminal
+cd frontend\nyc-metropolis-taxi-analytics\  # using cmd terminal
 http://127.0.0.1:5500
-open index.html
+```
+
+## Notes:
+```
+Pages take time (latency time) to load due to computation happening inside the backend (with pandas) and update happening on the frontend. Wait few seconds to see the updates on the pages
 ```
 
 ## Project Structure
@@ -129,3 +155,4 @@ urban_mobility/
 * **Maurice Nshimyumukiza** – [m.nshimyumu@alustudent.com](mailto:m.nshimyumu@alustudent.com)
 * **Pascal Louis Nsigo** – [p.nsigo@alustudent.com](mailto:p.nsigo@alustudent.com)
 
+## Incase of anything, please carefully read this document again, or contact any of the contributors.
